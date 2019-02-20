@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Coiny', cursive;
+}
+
+h1 {
+  color: red;
+  background-color: green;
+  background-image: url('./images/unnamed.jpg');
+}
+
+p {
+  text-align: center;
+  width: 500px;
+  border: 1px solid gainsboro;
+  border-radius: 20px;
+  padding: 10px 50px;
+}
+
+.heading, #top, h6, ul {
+  font-size: 80px;
+  font-size: 1.2em;
+  font-size: 1.5rem;
+}
+
+#top, .heading, h6, h4, ol {
+  font-weight: 300;
+}
+
+ol li {
+  color: blue;
+}
+
+ol>li {
+  color: red;
+}
+
+p {
+  transition: all 2s;
+}
+
+p:hover {
+  background: #1d8bbe;
+  width: 1000px;
+}
+
+a:active {
+  color: yellow;
+}
