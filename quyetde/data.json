@@ -3,13 +3,13 @@
     "id": 0,
     "content": "    sdfasdfasdf",
     "yes": 0,
-    "no": 0,
+    "no": 1,
     "createdAt": "2/27/2019, 8:54:00 PM"
   },
   {
     "id": 1,
     "content": "    123124523",
-    "yes": 0,
+    "yes": 1,
     "no": 0,
     "createdAt": "2/27/2019, 8:54:07 PM"
   }
