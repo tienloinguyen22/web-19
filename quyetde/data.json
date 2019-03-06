@@ -1,16 +1,1 @@
-[
-  {
-    "id": 0,
-    "content": "    sdfasdfasdf",
-    "yes": 0,
-    "no": 1,
-    "createdAt": "2/27/2019, 8:54:00 PM"
-  },
-  {
-    "id": 1,
-    "content": "    123124523",
-    "yes": 1,
-    "no": 0,
-    "createdAt": "2/27/2019, 8:54:07 PM"
-  }
-]
+[{"id":0,"content":"    sdfasdfasdf","yes":0,"no":1,"createdAt":"2/27/2019, 8:54:00 PM"},{"id":1,"content":"    123124523","yes":4,"no":1,"createdAt":"2/27/2019, 8:54:07 PM"},{"id":2,"content":"","yes":0,"no":0,"createdAt":"3/6/2019, 7:58:37 PM"},{"id":3,"content":"wertyuio","yes":0,"no":0,"createdAt":"3/6/2019, 8:15:06 PM"},{"id":4,"content":"qwertyuiop","yes":0,"no":0,"createdAt":"3/6/2019, 8:22:28 PM"},{"id":5,"content":"qwertyuiop12323123123","yes":0,"no":0,"createdAt":"3/6/2019, 8:22:48 PM"},{"id":6,"content":"sfghjkcvbnm,nbvc","yes":0,"no":0,"createdAt":"3/6/2019, 8:23:09 PM"},{"id":7,"content":"sfghjkcvbnm,nbvc231312313","yes":0,"no":0,"createdAt":"3/6/2019, 8:23:19 PM"}]
