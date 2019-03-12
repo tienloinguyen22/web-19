@@ -30,7 +30,6 @@ mongoose.connect('mongodb://localhost:27017/quyetde', (err) => {
     };
     
     const result = await questionModel.create(newQuestion);
-    console.log(result);
 
     res.status(201).json({
       id: result._id,
@@ -39,72 +38,36 @@ mongoose.connect('mongodb://localhost:27017/quyetde', (err) => {
 
   server.get('/vote/:questionId/:vote', async (req, res) => {
     const { questionId, vote } = req.params;
-    console.log(questionId, vote);
 
-    fs.readFile('./data.json', (error, data) => {
-      if (error) {
-        res.status(500).send('Internal server error');
-      }
-
-      const questions = JSON.parse(data);
-      for (let item of questions) {
-        if (item.id === Number(questionId)) {
-          vote === 'yes' ? item.yes += 1 : item.no += 1;
-          break;
-        }
-      }
-
-      fs.writeFile('./data.json', JSON.stringify(questions), (err) => {
-        if (err) {
-          res.status(500).send('Internal server error');
-        }
-
-        res.status(200).send('Update question success');
-      });
-    });
+    const existedQuestion = await questionModel.findById(questionId).exec();
+    if (!existedQuestion) {
+      res.status(404).end('Question not found');
+    } else {
+      await questionModel.findByIdAndUpdate(questionId, {[vote]: {$inc: 1}}).exec();
+      res.status(200).end('Update success');
+    }
   });
 
   server.get('/result/:questionId', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, './public/vote-result.html'));
   });
 
-  server.get('/get-question-by-id', (req, res) => {
+  server.get('/get-question-by-id', async (req, res) => {
     const questionId = req.query.questionId;
-
-    fs.readFile('./data.json', (error, data) => {
-      if (error) {
-        res.status(500).send('Internal server error');
-      }
-
-      const questions = JSON.parse(data);
-      let selectQuestion;
-      for (let item of questions) {
-        if (item.id === Number(questionId)) {
-          selectQuestion = item;
-          break;
-        }
-      }
-
-      if (selectQuestion) {
-        res.status(200).json(selectQuestion);
-      } else {
-        res.status(200).json({message: 'Question not found'});
-      }
-    });
+    const question = await questionModel.findById(questionId).exec();
+    res.status(200).json(question);
   });
 
-  server.get('/random-question', (req, res) => {
-    fs.readFile('./data.json', (error, data) => {
-      if (error) {
-        res.status(500).send('Internal server error');
-      }
+  server.get('/random-question', async (req, res) => {
+    try {
+      const randomQuestion = await questionModel.aggregate([
+        { $sample: { size: 1 } }
+      ]);
 
-      const questions = JSON.parse(data);
-      const randomIndex = Math.floor(Math.random() * questions.length);
-      const randomQuestion = questions[randomIndex];
-
-      res.status(200).json(randomQuestion);
-    });
+      res.status(200).json(randomQuestion[0]);
+    } catch (error) {
+      res.status(500).end(error.message);
+    }
   });
 
   server.listen(3000, (error) => {
