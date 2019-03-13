@@ -43,7 +43,7 @@ mongoose.connect('mongodb://localhost:27017/quyetde', (err) => {
     if (!existedQuestion) {
       res.status(404).end('Question not found');
     } else {
-      await questionModel.findByIdAndUpdate(questionId, {[vote]: {$inc: 1}}).exec();
+      await questionModel.findByIdAndUpdate(questionId, {$inc: {[vote]: 1}}).exec();
       res.status(200).end('Update success');
     }
   });

@@ -3,17 +3,17 @@ $(document).ready(() => {
     url: '/random-question',
     type: 'GET',
     success: (data) => {
-      console.log(data.id);
-      if (data.id !== null) {
+      console.log(data);
+      if (data._id) {
         document.getElementById('question-content').innerText = data.content;
 
         // listen click
         document.getElementById('vote-yes').addEventListener('click', () => {
           $.ajax({
-            url: `/vote/${data.id}/yes`,
+            url: `/vote/${data._id}/yes`,
             type: 'GET',
             success: (_result) => {
-              window.location.href = `/result/${data.id}`;
+              window.location.href = `/result/${data._id}`;
             },
             error: (error) => {
               console.log(error);
@@ -23,10 +23,10 @@ $(document).ready(() => {
 
         document.getElementById('vote-no').addEventListener('click', () => {
           $.ajax({
-            url: `/vote/${data.id}/no`,
+            url: `/vote/${data._id}/no`,
             type: 'GET',
             success: (_result) => {
-              window.location.href = `/result/${data.id}`;
+              window.location.href = `/result/${data._id}`;
             },
             error: (error) => {
               console.log(error);
@@ -35,7 +35,7 @@ $(document).ready(() => {
         });
 
         document.getElementById('question-result').addEventListener('click', () => {
-          window.location.href = `/result/${data.id}`;
+          window.location.href = `/result/${data._id}`;
         });
 
         document.getElementById('other-question').addEventListener('click', () => {
