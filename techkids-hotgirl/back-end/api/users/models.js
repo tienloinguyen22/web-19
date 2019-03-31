@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  permissions: [String],
 });
 const UserModel = mongoose.model('User', UserSchema);
 
