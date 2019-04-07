@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const GameModel = require('./models/game.models.js');
 const path = require('path');
+const cors = require('cors');
 
 mongoose.connect('mongodb://localhost:27017/minihack', (error) => {
   if (error) {
@@ -14,6 +15,9 @@ mongoose.connect('mongodb://localhost:27017/minihack', (error) => {
   server.use(express.static('public'));
   server.use(bodyParser.urlencoded({ extended: false }));
   server.use(bodyParser.json());
+  server.use(cors({
+    origin: ['http://localhost:3000'],
+  }));
 
   // routes
   server.get('/', (req, res) => {
@@ -28,7 +32,7 @@ mongoose.connect('mongodb://localhost:27017/minihack', (error) => {
     try {
       const players = req.body.players;
       const newGame = await GameModel.create({
-        players: JSON.parse(players),
+        players: players,
         scores: [],
       });
 
@@ -76,10 +80,10 @@ mongoose.connect('mongodb://localhost:27017/minihack', (error) => {
     }
   });
 
-  server.listen(3000, (error) => {
+  server.listen(3001, (error) => {
     if (error) {
       throw error;
     }
-    console.log('Server listen on port 3000...');
+    console.log('Server listen on port 3001...');
   });
 });
