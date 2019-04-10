@@ -76,6 +76,7 @@ mongoose.connect('mongodb://localhost:27017/minihack', (error) => {
         }
       }
     } catch (error) {
+      console.log(error);
       res.status(error.status || 500).end(error.message || 'Internal server error');
     }
   });
